@@ -14,7 +14,7 @@ app.get("/",(req,res)=>{
 })
 
 app.listen("1300",()=>{
-    console.log("server is listing");
+    console.log("Server Is Listening To Port 1300");
     
 })
     
