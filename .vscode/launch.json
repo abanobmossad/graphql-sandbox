@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "pwa-node",
+      "name": "Launch Development",
+      "request": "launch",
+      "console": "integratedTerminal",
+      "runtimeArgs": [
+        "run-script",
+        "start:dev"
+      ],
+      "runtimeExecutable": "npm",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+    },
+  ]
+}

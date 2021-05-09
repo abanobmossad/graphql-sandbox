@@ -1,26 +1,72 @@
 {
-  "name": "learn",
+  "name": "graphql-sandbox",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "GraphQL sandbox",
+  "main": "src/app.ts",
   "scripts": {
-    "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "json:server": "json-server --watch db.json"
+    "build": "tsc",
+    "heroku-postbuild": "npm run build",
+    "start": "node build/app",
+    "start:dev": "nodemon",
+    "inspect": "nodemon --inspect src/app.ts",
+    "test": "jest",
+    "lint": "eslint --ignore-path .gitignore --ext .ts src/",
+    "lint:fix": "npm run lint -- --fix"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abanobmossad/GraphQL-sandbox.git"
+  },
+  "author": "Abanob Mossad",
   "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm test"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "npm run lint:fix"
+    ]
+  },
   "dependencies": {
-    "axios": "^0.18.0",
-    "express": "^4.16.4",
-    "express-graphql": "^0.7.1",
-    "graphql": "^14.0.2",
-    "json-server": "^0.14.0",
-    "lodash": "^4.17.11"
+    "axios": "^0.21.1",
+    "dotenv": "^9.0.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.5.0",
+    "json-serve": "^0.1.0",
+    "lodash": "^4.17.21",
+    "morgan": "^1.10.0",
+    "reflect-metadata": "^0.1.13",
+    "typedi": "^0.10.0",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
-    "eslint": "^5.8.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0"
-  }
+    "@types/express": "^4.17.11",
+    "@types/jest": "^26.0.23",
+    "@types/lodash": "^4.14.168",
+    "@types/node": "^15.0.2",
+    "@typescript-eslint/eslint-plugin": "^4.22.1",
+    "@typescript-eslint/parser": "^4.22.1",
+    "eslint": "^7.26.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^6.0.0",
+    "jest": "^26.6.3",
+    "lint-staged": "^11.0.0",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.5.6",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  },
+  "bugs": {
+    "url": "https://github.com/abanobmossad/GraphQL-sandbox.git/issues"
+  },
+  "homepage": "https://github.com/abanobmossad/GraphQL-sandbox.git#readme"
 }
