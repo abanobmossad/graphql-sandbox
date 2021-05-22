@@ -1,25 +1,29 @@
-import 'reflect-metadata'; // We need this in order to use @Decorators
 import express from 'express';
-import config from './config';
-import Logger from './loaders/logger';
-import expressApp from './loaders/express';
+import { graphqlHTTP } from 'express-graphql';
+import { GraphQLSchema } from 'graphql';
+import { postsRouter } from './services/posts';
+import { RootQuery } from './services/root.graphql';
+import { usersRouter } from './services/users';
+// Create server
+export const app = express();
 
-async function startServer() {
-  const app = express();
-  expressApp({ app });
+// Load routes...
+app.use('/users', usersRouter);
+app.use('/posts', postsRouter);
 
-  app
-    .listen(config.port, () => {
-      Logger.info(`
-      ################################################
-          🛡️  Server listening on port: ${config.port} 🛡️
-      ################################################
-    `);
-    })
-    .on('error', (err) => {
-      Logger.error(err);
-      process.exit(1);
-    });
-}
-
-startServer();
+// Load graphql
+app.use(
+  '/graphql',
+  graphqlHTTP({
+    graphiql: true,
+    schema: new GraphQLSchema({ query: RootQuery }),
+  }),
+);
+// Landing page
+app.use('/', (_req, res) => {
+  res
+    .status(200)
+    .send(
+      '<h2> GraphQL Sabdbox, Go to <a href="/graphql"><code>Graphiql</code></a> </h2>',
+    );
+});
