@@ -1,4 +1,5 @@
 import { GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql';
+// eslint-disable-next-line import/no-cycle
 import { getUserPosts, PostType } from '../posts';
 
 export const UserType = new GraphQLObjectType({
